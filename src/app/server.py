@@ -12,7 +12,7 @@ mimetype = 'application/json'
 
 
 # GET
-@app.route('geocaches/id/<int: geo_id>')
+@app.route('/geocaches/id/<int:geo_id>')
 def get_geocache_by_id(geo_id: int):
     result = Geocache.get_geocache(geo_id)
     status = 200
@@ -22,7 +22,7 @@ def get_geocache_by_id(geo_id: int):
     return Response(json.dumps(result), mimetype=mimetype, status=status)
 
 
-@app.route('geocaches/all')
+@app.route('/geocaches/all')
 def get_all_users():
     result = Geocache.get_all_geocaches()
     status = 200
@@ -32,7 +32,7 @@ def get_all_users():
     return Response(json.dumps(result), mimetype=mimetype, status=status)
 
 
-@app.route('geocaches/hint/<str: hint>')
+@app.route('/geocaches/hint/<string:hint>')
 def get_geocache_by_hint(hint: str):
     result = Geocache.geocache_by_hint(hint)
     status = 200
@@ -42,7 +42,7 @@ def get_geocache_by_hint(hint: str):
     return Response(json.dumps(result), mimetype=mimetype, status=status)
 
 
-@app.route('logbooks/all')
+@app.route('/logbooks/all')
 def get_all_logbooks():
     result = Logbook.get_all_logbooks()
     status = 200
@@ -52,7 +52,7 @@ def get_all_logbooks():
     return Response(json.dumps(result), mimetype=mimetype, status=status)
 
 
-@app.route('logbooks/email/<str: email>')
+@app.route('/logbooks/email/<string:email>')
 def get_logbook_by_email(email: str):
     result = Logbook.logbook_by_email(email)
     status = 200
@@ -62,7 +62,7 @@ def get_logbook_by_email(email: str):
     return Response(json.dumps(result), mimetype=mimetype, status=status)
 
 
-@app.route('geocaches/notfound')
+@app.route('/geocaches/notfound')
 def get_geocaches_not_found():
     result = Logbook.geocache_not_found()
     status = 200
@@ -94,12 +94,12 @@ def create_user():
 
 
 @app.route('/logbooks/create/logbook', methods=['POST'])
-def create_user():
+def create_logbook():
     if not request.json:
         return Response(json.dumps({'error': f'Bad Request.'}), mimetype=mimetype, status=400)
     log_id = request.json['id']
-    email = request.json['lat']
-    geocache = request.json['lon']
+    email = request.json['email']
+    geocache = request.json['geocache']
     stamp = datetime.datetime.now()
     logbook = Logbook.get_logbook(log_id)
     status = 200
@@ -113,7 +113,7 @@ def create_user():
 
 
 # UPDATE
-@app.route('/geocaches/update/geocache', methods=['PUT'])
+@app.route('/geocaches/update', methods=['PUT'])
 def update_geocache():
     if not request.json:
         return Response(json.dumps({'error': f'Bad request.'}), mimetype=mimetype, status=400)
@@ -151,7 +151,7 @@ def update_logbook():
 
 # DELETE
 @app.route('/geocaches/delete', methods=['DELETE'])
-def delete_user_by_email():
+def delete_geocache_by_id():
     if not request.json:
         return Response(json.dumps({'error': f'Bad request.'}), mimetype=mimetype, status=400)
     geo_id = request.json['id']
@@ -167,7 +167,7 @@ def delete_user_by_email():
 
 
 @app.route('/logbooks/delete', methods=['DELETE'])
-def delete_user_by_email():
+def delete_logbook_by_id():
     if not request.json:
         return Response(json.dumps({'error': f'Bad request.'}), mimetype=mimetype, status=400)
     log_id = request.json['id']
