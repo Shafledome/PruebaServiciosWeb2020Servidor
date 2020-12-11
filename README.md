@@ -50,10 +50,10 @@ https://pythonbasics.org/flask-http-methods/
 https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 
 ## How to run Servers files
-1. Navigate to *~/yatam-web* in terminal
-2. Use *python src/app/[filename]* where *[filename]* can be *server_opendata.py* or *server_db.py*.
+1. Navigate to *~/PruebaServiciosWeb2020Servidor* in terminal
+2. Use *python src/app/[filename]* where *[filename]* can be *server.py*.
 	```
-	python src/app/server_opendata.py
+	python src/app/server.py
 	```
 3. Open your browser an type *127.0.0.1/30006/<your-query>* without '>' and '<'
 4. You can also use *curl* to test it (in terminal):
