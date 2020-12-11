@@ -17,11 +17,11 @@ db = firebase.database()
 # This query will return users ordered by name
 def get(entry, order=None, value=None):
     if value is not None and order is not None:
-        result = db.child(entry).order_by_child(order).equal_to(value).get()
+        result = db.child(entry).order_by_child(order).equal_to(value).get().val()
     elif order is not None:
-        result = db.child(entry).order_by_child(order).get()
+        result = db.child(entry).order_by_child(order).get().val()
     else:
-        result = db.child(entry).get()
+        result = db.child(entry).get().val()
     return result
 
 

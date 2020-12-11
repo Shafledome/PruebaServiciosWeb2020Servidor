@@ -25,6 +25,7 @@ def get_geocache_by_id(geo_id: int):
 @app.route('/geocaches/all')
 def get_all_users():
     result = Geocache.get_all_geocaches()
+    print(result)
     status = 200
     if result is None:
         status = 400
